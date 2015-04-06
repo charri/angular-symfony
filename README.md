@@ -2,12 +2,11 @@
 
 ## Purpose
 
-When creating a read-only API with FOSRestBundle you can use angular's ngResource out of the box.
+When creating a read-only API with FOSRestBundle you can use angular's ngResource right out of the box.
 However, when validating input with symfony forms you're going to run into a few problems as symfony forms requires data to be nested with the form's name, this also allows for multiple forms to be submitted with one request. Okay, not that bad you would think... Unfortunately this causes havoc with angular (requires array for collection of items, etc).
 
 ### Security
-From a security point is also better to return results as an object that array
-> Because this is not a valid JavaScript statement, it cannot be parsed and instantiated as a new object in JavaScript. This therefore prevents the cross-site scripting attack from accessing data from AJAX JSON services on other domains. 
+From a security point it is better to return results as objects than an array as its not a valid JavaScript statement, it cannot be parsed and instantiated as a new object in JavaScript. This therefore prevents the cross-site scripting attack from accessing data from AJAX JSON services on other domains.
 > http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx/
 
 ## Quickstart
@@ -15,7 +14,7 @@ From a security point is also better to return results as an object that array
 For a complete example see the examples folder.
 
 Basic app setup (this can be omitted). 
-´´´js
+```js
 var myApp = angular.module('app', ['app.resources']);
 
 myApp.config(['$httpProvider', '$injector', function ($httpProvider, $injector) {
@@ -35,10 +34,10 @@ myApp.config(['$httpProvider', '$injector', function ($httpProvider, $injector) 
     });
 
 }]);
-´´´
+```
 
 Example 
-´´´js
+```js
 var myAppResources = angular.module('app.resources', [ 'symfony.resource' ]);
 
 myAppResources.factory('Contact', ['$resource', function($resource) {
@@ -47,4 +46,4 @@ myAppResources.factory('Contact', ['$resource', function($resource) {
     }, { nest : 'person' } /* the default nest */);
 }]);
 
-´´´
+```
